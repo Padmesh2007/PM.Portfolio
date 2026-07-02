@@ -1,4 +1,5 @@
 import React from 'react';
+import Interactive3DCard from './Interactive3DCard';
 import img1 from '../assets/anime_project_1.png';
 import img2 from '../assets/anime_project_2.png';
 import img3 from '../assets/anime_project_3.png';
@@ -12,26 +13,14 @@ const projects = [
 ];
 
 const Projects = () => (
-  <section id="projects">
-    <div className="section-label reveal">Selected Work</div>
-    <h2 className="section-heading reveal delay-1">Projects</h2>
-    <div className="projects-grid">
+  <section id="projects" className="py-32 px-8 max-w-7xl mx-auto relative z-10">
+    <div className="text-accentRed text-sm font-bold tracking-widest uppercase mb-4 reveal">Selected Work</div>
+    <h2 className="text-4xl md:text-6xl font-black text-white mb-16 reveal delay-1">Projects</h2>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((p, i) => (
-        <div className="flip-card reveal" key={i} style={{ transitionDelay: `${i * 0.08}s` }}>
-          <div className="flip-card-inner">
-            <div className="flip-card-front">
-              <img src={p.img} alt={p.title} />
-              <div className="flip-card-front-label">{p.tag}</div>
-            </div>
-            <div className="flip-card-back">
-              <div className="project-tag">{p.tag}</div>
-              <div className="project-title">{p.title}</div>
-              <p className="project-desc">{p.desc}</p>
-              <div className="project-tech">
-                {p.tech.map((t, j) => <span className="tech-chip" key={j}>{t}</span>)}
-              </div>
-            </div>
-          </div>
+        <div className="reveal" key={i} style={{ transitionDelay: `${i * 0.1}s` }}>
+          <Interactive3DCard {...p} />
         </div>
       ))}
     </div>

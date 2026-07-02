@@ -1,0 +1,119 @@
+.card3d-container {
+  width: 100%;
+  height: 455px; /* from reference */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2500px; /* from reference */
+  cursor: none; /* handled by custom cursor */
+}
+
+.card3d-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 30px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.card3d-container:hover .card3d-wrapper {
+  transform: rotateX(20deg) rotateY(10deg); /* 3D tilt effect on hover */
+  overflow: visible;
+}
+
+.card3d-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s;
+  z-index: 1;
+}
+
+/* Simulated wrapper::before and after from the reference image for lighting/shadows */
+.card3d-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+  opacity: 0.8;
+  transition: opacity 0.5s;
+  z-index: 2;
+}
+
+.card3d-container:hover .card3d-overlay {
+  opacity: 1;
+}
+
+/* Popping out content (simulating the character popping out) */
+.card3d-content {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  z-index: 3;
+  transition: transform 0.5s, bottom 0.5s;
+  transform: translateZ(0); /* base level */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card3d-container:hover .card3d-content {
+  transform: translateZ(80px) translateY(-30px); /* The pop-out effect! */
+}
+
+.card3d-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.card3d-desc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card3d-tag {
+  align-self: flex-start;
+  background: var(--accent-red);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card3d-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.card3d-tech span {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

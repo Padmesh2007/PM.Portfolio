@@ -1,0 +1,159 @@
+/* Experience.css */
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .exp-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.exp-timeline {
+  border-left: 2px solid var(--border-color);
+  padding-left: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.exp-entry {
+  position: relative;
+}
+
+.exp-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  position: absolute;
+  left: -2rem;
+  top: 0.4rem;
+  transform: translateX(-50%);
+  border: 4px solid var(--bg-primary);
+  box-sizing: content-box;
+}
+
+.exp-date {
+  font-size: 0.85rem;
+  color: var(--accent-red);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.exp-role {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+
+.exp-company {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.exp-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.exp-bullets li {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.exp-bullets li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-red);
+  font-weight: bold;
+}
+
+/* FLIP CARDS */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  width: 100%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+}
+
+.flip-card-front {
+  display: flex;
+  flex-direction: column;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+  transition: filter 0.3s;
+}
+
+.flip-card:hover .flip-card-front img {
+  filter: brightness(1);
+}
+
+.flip-card-front-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 17, 21, 0.85);
+  padding: 1.2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}

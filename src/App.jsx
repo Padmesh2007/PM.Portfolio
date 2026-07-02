@@ -1,12 +1,17 @@
 import React from 'react'
 import Home from './pages/Home'
-import VantaBackground from './components/VantaBackground'
+import Hyperspeed from './components/Hyperspeed'
+import TargetCursor from './components/TargetCursor'
 
 function App() {
   return (
-    <VantaBackground>
-      <Home />
-    </VantaBackground>
+    <>
+      <TargetCursor />
+      <Hyperspeed />
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <Home />
+      </div>
+    </>
   )
 }
 

@@ -1,0 +1,52 @@
+.target-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  width: 0;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-cursor-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.target-cursor-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-style: solid;
+  border-width: 0;
+}
+
+/* Default positions for spinning mode */
+.corner-tl {
+  border-top-width: 2px;
+  border-left-width: 2px;
+  transform: translate(-16px, -16px);
+}
+
+.corner-tr {
+  border-top-width: 2px;
+  border-right-width: 2px;
+  transform: translate(16px, -16px);
+}
+
+.corner-br {
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+  transform: translate(16px, 16px);
+}
+
+.corner-bl {
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  transform: translate(-16px, 16px);
+}

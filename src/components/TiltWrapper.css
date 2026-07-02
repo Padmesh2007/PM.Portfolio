@@ -1,0 +1,26 @@
+.tilt-card-container {
+  perspective: 2000px;
+  width: 100%;
+  height: 100%;
+}
+.tilt-card-wrapper {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.tilt-card-container:hover .tilt-card-wrapper {
+  transform: rotateX(8deg) rotateY(-8deg) scale3d(1.02, 1.02, 1.02);
+  z-index: 10;
+}
+.tilt-card-content {
+  transform: translateZ(0);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.tilt-card-container:hover .tilt-card-content {
+  transform: translateZ(20px);
+}

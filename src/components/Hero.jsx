@@ -3,6 +3,7 @@ import animeProfile from '../assets/profile imge1.jpeg';
 import { FaGithub, FaLinkedin, FaEnvelope, FaReact, FaPython, FaFigma, FaNodeJs } from 'react-icons/fa';
 import { SiJavascript } from 'react-icons/si';
 import { TypeAnimation } from 'react-type-animation';
+import NeonButton from './NeonButton';
 
 const Hero = () => {
   useEffect(() => {
@@ -15,15 +16,16 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="hero">
-      <div>
+    <section id="hero" className="min-h-screen w-full relative flex items-center justify-center pt-24 pb-16 px-6 lg:px-16 z-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* LEFT */}
-        <div className="hero-left">
-          <div className="hero-greeting">Hello, I'm</div>
-          <h1 className="hero-name">
-            <span className="highlight">Padmesh</span><br />M.
+        <div className="hero-left flex flex-col items-start gap-2 z-20">
+          <div className="text-white/70 text-sm md:text-base font-semibold mb-2">Hello, I'm</div>
+          <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter">
+            <span className="text-accentRed">Padmesh</span><br />
+            <span className="text-white">M.</span>
           </h1>
-          <div className="hero-role" style={{ display: 'inline-block', minHeight: '1.5em' }}>
+          <div className="text-xl md:text-2xl font-bold text-white h-8 mt-4 mb-2">
             <TypeAnimation
               sequence={[
                 'Fullstack Developer', 2000,
@@ -38,31 +40,42 @@ const Hero = () => {
               repeat={Infinity}
             />
           </div>
-          <p className="hero-desc">
+          <p className="text-sm md:text-base text-white/60 max-w-md leading-relaxed mt-2">
             Passionate about technology. I specialize in Web Development and Web Design,
             High-performance applications and carry strong UI/UX skills to create impactful digital experiences.
           </p>
-          <div className="hero-socials">
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="hero-social-icon"><FaGithub /></a>
-            <a href="https://linkedin.com/in/padmesh-m-3b8ba4314" target="_blank" rel="noreferrer" className="hero-social-icon"><FaLinkedin /></a>
-            <a href="mailto:padmeshmurugan07@gmail.com" className="hero-social-icon"><FaEnvelope /></a>
+          <div className="flex gap-4 mt-8">
+            <a href="https://github.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><FaGithub /></a>
+            <a href="https://linkedin.com/in/padmesh-m-3b8ba4314" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><FaLinkedin /></a>
+            <a href="mailto:padmeshmurugan07@gmail.com" className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><FaEnvelope /></a>
           </div>
-          <div className="hero-cta-group">
-            <a href="#projects" className="btn-primary">View Projects</a>
-            <a href="#contact" className="btn-outline">Contact Me</a>
+          <div className="flex flex-col sm:flex-row gap-6 mt-10 w-full sm:w-auto">
+            <NeonButton href="#projects">View Projects</NeonButton>
+            <NeonButton href="#contact" className="!bg-bgPrimary !border-white/20 !shadow-none">Contact Me</NeonButton>
           </div>
         </div>
 
         {/* RIGHT - character + floating icons */}
-        <div className="hero-right reveal-right">
-          <div className="float-icon"><FaReact style={{ color: '#61dafb' }} /></div>
-          <div className="float-icon"><SiJavascript style={{ color: '#f7df1e' }} /></div>
-          <div className="float-icon"><FaPython style={{ color: '#3776ab' }} /></div>
-          <div className="float-icon"><FaFigma style={{ color: '#f24e1e' }} /></div>
-          <div className="float-icon"><FaNodeJs style={{ color: '#339933' }} /></div>
+        <div className="relative w-full h-[400px] lg:h-[600px] flex items-center justify-center reveal-right mt-16 lg:mt-0">
+          
+          <div className="absolute top-[5%] right-[12%] w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg animate-[bounce_4s_infinite] z-20">
+            <FaReact className="text-2xl text-[#61dafb]" />
+          </div>
+          <div className="absolute top-[35%] left-[8%] w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg animate-[bounce_5s_infinite] z-20">
+            <SiJavascript className="text-2xl text-[#f7df1e]" />
+          </div>
+          <div className="absolute bottom-[40%] right-[8%] w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg animate-[bounce_3s_infinite] z-20">
+            <FaPython className="text-2xl text-[#3776ab]" />
+          </div>
+          <div className="absolute bottom-[10%] left-[18%] w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg animate-[bounce_6s_infinite] z-20">
+            <FaFigma className="text-2xl text-[#f24e1e]" />
+          </div>
+          <div className="absolute bottom-[5%] right-[25%] w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg animate-[bounce_4.5s_infinite] z-20">
+            <FaNodeJs className="text-2xl text-[#339933]" />
+          </div>
 
-          <div className="hero-profile-container">
-            <img src={animeProfile} alt="Padmesh - Developer" />
+          <div className="w-[300px] h-[300px] md:w-[350px] md:h-[350px] lg:w-[420px] lg:h-[420px] rounded-[30px] overflow-hidden shadow-2xl relative z-10 border-4 border-bgSecondary bg-bgSecondary">
+            <img src={animeProfile} alt="Padmesh - Developer" className="w-full h-full object-contain" />
           </div>
         </div>
       </div>

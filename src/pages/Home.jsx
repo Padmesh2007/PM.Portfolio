@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import Cursor from '../components/Cursor';
 import ScrollProgress from '../components/ScrollProgress';
 import Navbar from '../components/Navbar';
+import Landing from '../components/Landing';
 import Hero from '../components/Hero';
-import Ticker from '../components/Ticker';
+import Stats from '../components/Stats';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Projects from '../components/Projects';
 import Experience from '../components/Experience';
+import Gallery from '../components/Gallery';
 import Achievements from '../components/Achievements';
-import Hackathons from '../components/Hackathons';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 
@@ -29,17 +30,17 @@ const Home = () => {
 
   return (
     <>
-      <Cursor />
       <ScrollProgress />
+      <Landing />
       <Navbar />
       <Hero />
-      <Ticker />
+      <Stats />
       <About />
       <Skills />
       <Projects />
       <Experience />
+      <Gallery />
       <Achievements />
-      <Hackathons />
       <Contact />
       <Footer />
     </>

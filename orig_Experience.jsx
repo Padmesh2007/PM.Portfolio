@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Experience.css';
 import img1 from '../assets/anime_project_1.png';
 import img2 from '../assets/anime_project_2.png';
 import img3 from '../assets/anime_project_3.png';
