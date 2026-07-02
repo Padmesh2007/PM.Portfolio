@@ -12,7 +12,7 @@ const About = () => (
 
     <div className="reveal flex flex-col items-start">
       <div className="text-accentRed text-sm font-bold tracking-widest uppercase mb-4">About Me</div>
-      <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-8">Building Meaningful<br />Digital Experiences</h2>
+      <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-8"> Learning is  <br />Gaining </h2>
       <p className="text-white/70 text-base md:text-lg leading-relaxed mb-6">
         I’m Padmesh M, based in Coimbatore, with a strong interest in creating meaningful digital experiences. I enjoy turning ideas into something practical, whether it’s building a project from scratch or improving an existing one with better structure and clarity.
       </p>

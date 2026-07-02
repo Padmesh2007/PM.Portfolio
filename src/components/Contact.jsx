@@ -1,11 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaLinkedin, FaPhone } from 'react-icons/fa';
+import { Check } from 'lucide-react';
 import Stepper, { Step } from './Stepper';
+import { db } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import Confetti from 'react-confetti';
+import { motion, AnimatePresence } from 'framer-motion';
+
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleSubmit = async () => {
+    if (!name || !email || !message) {
+      alert("Please fill in all required fields (Name, Email, Message).");
+      return;
+    }
+    
+    try {
+      await addDoc(collection(db, 'messages'), {
+        name,
+        email,
+        subject,
+        message,
+        timestamp: serverTimestamp()
+      });
+      setIsSuccess(true);
+      // Reset form
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+      
+      // Auto close after 6 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 6000);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert('Failed to send message. Please try again later.');
+    }
+  };
 
   return (
     <section id="contact" className="py-32 px-6 lg:px-16 bg-bgSecondary relative z-10">
@@ -29,7 +82,7 @@ const Contact = () => {
                 <div className="w-12 h-12 rounded-full border border-borderColor bg-bgPrimary flex items-center justify-center text-accentBlue group-hover:bg-accentBlue group-hover:text-white transition-colors">
                   <FaLinkedin />
                 </div>
-                <span className="font-semibold text-sm md:text-base break-all">linkedin.com/in/padmesh-m-3b8ba4314</span>
+                <span className="font-semibold text-sm md:text-base break-all">Padmesh M</span>
               </a>
               <a className="flex items-center gap-4 text-white hover:text-accentOrange transition-colors group" href="tel:9363983922">
                 <div className="w-12 h-12 rounded-full border border-borderColor bg-bgPrimary flex items-center justify-center text-accentOrange group-hover:bg-accentOrange group-hover:text-white transition-colors">
@@ -43,7 +96,7 @@ const Contact = () => {
           <div className="reveal delay-2">
             <Stepper
               initialStep={1}
-              onFinalStepCompleted={() => alert('Message Sent!')}
+              onFinalStepCompleted={handleSubmit}
               backButtonText="Previous"
               nextButtonText="Next"
               stepCircleContainerClassName="bg-bgPrimary border-borderColor"
@@ -92,6 +145,51 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      
+      {/* Success Modal */}
+      <AnimatePresence>
+        {isSuccess && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <Confetti
+              width={windowSize.width}
+              height={windowSize.height}
+              recycle={false}
+              numberOfPieces={600}
+              gravity={0.15}
+            />
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => setIsSuccess(false)}
+            />
+            
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0, y: 100 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.5, opacity: 0, y: 100 }}
+              transition={{ type: "spring", damping: 20, stiffness: 200 }}
+              className="relative bg-bgSecondary border border-borderColor p-8 md:p-12 rounded-3xl max-w-md w-full text-center shadow-2xl flex flex-col items-center z-10"
+            >
+              <div className="w-24 h-24 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(34,197,94,0.4)]">
+                <Check size={48} strokeWidth={3} />
+              </div>
+              <h3 className="text-3xl md:text-4xl font-black text-white mb-4">Awesome!</h3>
+              <p className="text-white/70 text-lg mb-8">
+                Your message has been sent successfully. I'll get back to you soon!
+              </p>
+              <button 
+                onClick={() => setIsSuccess(false)}
+                className="bg-accentRed hover:bg-red-600 text-white font-bold text-lg py-4 px-10 rounded-full transition-colors w-full"
+              >
+                Close
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
